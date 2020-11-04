@@ -23,38 +23,56 @@ class PodcastPlayerUITests: XCTestCase {
     
     func test_01_jumpToEpisodePage() throws {
         // UI tests must launch the application that they test.
-        app.tables.staticTexts["Ep.118 科技不會放過聲音｜特別來賓 Firstory 共同創辦人于子軒"].tap()
+        let cell = app.tables.cells.firstMatch
+        let titleString = cell.staticTexts["cellTitle"].label
+        cell.tap()
         
         let titleLabel = app.staticTexts["episodeTitle"]
-        XCTAssert(titleLabel.label == "Ep.118 科技不會放過聲音｜特別來賓 Firstory 共同創辦人于子軒")
+        XCTAssert(titleLabel.label == titleString)
     }
     
     func test_02_jumpToPlayer() throws {
-        app.tables.staticTexts["Ep.118 科技不會放過聲音｜特別來賓 Firstory 共同創辦人于子軒"].tap()
+        let cell = app.tables.cells.firstMatch
+        let titleString = cell.staticTexts["cellTitle"].label
+        cell.tap()
         app.buttons["play"].tap()
         let titleLabel = app.staticTexts["title"]
-        XCTAssert(titleLabel.label == "Ep.118 科技不會放過聲音｜特別來賓 Firstory 共同創辦人于子軒")
+        XCTAssert(titleLabel.label == titleString)
     }
     
     func test_03_changeSeekBar() throws {
-        app.tables.staticTexts["Ep.118 科技不會放過聲音｜特別來賓 Firstory 共同創辦人于子軒"].tap()
+        let cell = app.tables.cells.firstMatch
+        
+        let nextCell = app.tables.cells.element(boundBy: 1)
+        let nextTitleString = nextCell.staticTexts["cellTitle"].label
+        print("titleString : \(nextTitleString)")
+        
+        cell.tap()
+        
         app.buttons["play"].tap()
         let timeSlider = app.sliders["timeSlider"]
-        timeSlider.adjust(toNormalizedSliderPosition: 0.99)
-        sleep(30)
+        timeSlider.adjust(toNormalizedSliderPosition: 1)
+        sleep(40)
         
         let titleLabel = app.staticTexts["title"]
-        XCTAssert(titleLabel.label == "Ep.117 別為了 5G 換 iPhone")
+        XCTAssert(titleLabel.label == nextTitleString)
     }
     
     func test_04_nextEpisode() throws {
-        app.tables.staticTexts["Ep.118 科技不會放過聲音｜特別來賓 Firstory 共同創辦人于子軒"].tap()
+        let cell = app.tables.cells.firstMatch
+        
+        let nextCell = app.tables.cells.element(boundBy: 1)
+        let nextTitleString = nextCell.staticTexts["cellTitle"].label
+        print("titleString : \(nextTitleString)")
+        
+        cell.tap()
+        
         app.buttons["play"].tap()
         app.buttons["next"].tap()
         
         sleep(5)
         
         let titleLabel = app.staticTexts["title"]
-        XCTAssert(titleLabel.label == "Ep.117 別為了 5G 換 iPhone")
+        XCTAssert(titleLabel.label == nextTitleString)
     }
 }

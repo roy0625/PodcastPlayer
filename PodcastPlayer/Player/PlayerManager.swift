@@ -10,7 +10,7 @@ import AVFoundation
 import MediaPlayer
 import Kingfisher
 
-protocol PlayerManagerProtocol: class {
+protocol PlayerManagerProtocol: AnyObject {
     func onProgressChange(_ seconds: Double)
     func onRateChange(_ rate: Float)
     func onEpisodeChange(_ index: Int, duration: Double)

@@ -16,7 +16,7 @@ class PlayerViewController: UIViewController {
     @IBOutlet weak private var timeLabel: UILabel!
     @IBOutlet weak private var endTimeLabel: UILabel!
     
-    var viewModel: PlayerViewModelType!
+    private var viewModel: PlayerViewModelType!
     
     static func instantiate(with viewModel: PlayerViewModelType) -> PlayerViewController {
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PlayerViewController") as! PlayerViewController
